@@ -6,11 +6,16 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(profile.url),
   title: `${profile.name} — ${profile.headline}`,
   description: profile.summary,
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
     title: `${profile.name} — ${profile.headline}`,
     description: profile.summary,
+    url: profile.url,
     type: "website",
   },
 };

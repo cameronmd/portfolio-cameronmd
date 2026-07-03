@@ -37,6 +37,7 @@ export const profile = {
     "Dundee.",
   location: "Dundee, Scotland",
   email: "cameron.matheson.dear@gmail.com",
+  url: "https://portfolio-cameronmd.vercel.app",
   interests:
     "Away from the keyboard: tinkering with a Raspberry Pi smart-home setup, " +
     "football, tennis and snooker, Munro bagging (and Kilimanjaro in 2020), and " +

@@ -5,6 +5,8 @@ A personal portfolio and CV site that showcases three projects — **TheGroupBet
 section. Built with a modern stack, fully unit-tested, and continuously
 deployed: every commit to `main` updates the live site automatically.
 
+**Live site: [portfolio-cameronmd.vercel.app](https://portfolio-cameronmd.vercel.app)**
+
 [![CI](https://github.com/cameronmd/portfolio-cameronmd/actions/workflows/ci.yml/badge.svg)](https://github.com/cameronmd/portfolio-cameronmd/actions/workflows/ci.yml)
 
 ---
