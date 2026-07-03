@@ -18,29 +18,39 @@ describe("Projects section", () => {
 });
 
 describe("ProjectCard", () => {
-  const project = projects[0];
+  const withLive = projects.find((p) => p.liveUrl)!;
+  const withChat = projects.find((p) => p.chatExample)!;
 
-  it("shows the tagline, stack and a source link", () => {
-    render(<ProjectCard project={project} />);
-    expect(screen.getByText(project.tagline)).toBeInTheDocument();
-    expect(screen.getByText(project.stack[0])).toBeInTheDocument();
-
-    const source = screen.getByRole("link", { name: /source/i });
-    expect(source).toHaveAttribute("href", project.repoUrl);
-    expect(source).toHaveAttribute("rel", expect.stringContaining("noopener"));
+  it("shows the tagline, use case and stack", () => {
+    render(<ProjectCard project={withLive} />);
+    expect(screen.getByText(withLive.tagline)).toBeInTheDocument();
+    expect(screen.getByText(withLive.useCase)).toBeInTheDocument();
+    expect(screen.getByText(withLive.stack[0])).toBeInTheDocument();
   });
 
-  it("only renders a live-site link when a liveUrl is present", () => {
-    const { rerender } = render(<ProjectCard project={project} />);
+  it("links to the live site (and never to source) when a liveUrl is present", () => {
+    render(<ProjectCard project={withLive} />);
+    const live = screen.getByRole("link", { name: /visit/i });
+    expect(live).toHaveAttribute("href", withLive.liveUrl);
+    expect(live).toHaveAttribute("rel", expect.stringContaining("noopener"));
     expect(
-      screen.queryByRole("link", { name: /live site/i })
+      screen.queryByRole("link", { name: /source/i })
     ).not.toBeInTheDocument();
+  });
 
-    rerender(
-      <ProjectCard project={{ ...project, liveUrl: "https://example.com" }} />
-    );
+  it("falls back to a generic live-site label when liveLabel is absent", () => {
+    render(<ProjectCard project={{ ...withLive, liveLabel: undefined }} />);
     expect(
-      screen.getByRole("link", { name: /live site/i })
-    ).toHaveAttribute("href", "https://example.com");
+      screen.getByRole("link", { name: /visit live site/i })
+    ).toBeInTheDocument();
+  });
+
+  it("renders the worked chat example instead of a link when there is no live site", () => {
+    render(<ProjectCard project={withChat} />);
+    expect(screen.queryByRole("link")).not.toBeInTheDocument();
+    // The bot's replies from the example are shown verbatim.
+    const botReply = withChat.chatExample!.find((m) => m.system)!;
+    expect(screen.getByText(botReply.text)).toBeInTheDocument();
+    expect(screen.getByText(/runs inside whatsapp/i)).toBeInTheDocument();
   });
 });

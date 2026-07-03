@@ -17,10 +17,24 @@ describe("projects data", () => {
     for (const project of projects) {
       expect(project.name).toBeTruthy();
       expect(project.tagline).toBeTruthy();
+      expect(project.useCase).toBeTruthy();
       expect(project.description).toBeTruthy();
       expect(project.highlights.length).toBeGreaterThan(0);
       expect(project.stack.length).toBeGreaterThan(0);
-      expect(project.repoUrl).toMatch(/^https:\/\/github\.com\//);
+      // Source is private, so every project links to a live site or shows a
+      // worked example instead — never a repo link.
+      const hasLive = typeof project.liveUrl === "string";
+      const hasExample = (project.chatExample?.length ?? 0) > 0;
+      expect(hasLive || hasExample).toBe(true);
+      if (project.liveUrl) {
+        expect(project.liveUrl).toMatch(/^https:\/\//);
+      }
+    }
+  });
+
+  it("never links to a private source repository", () => {
+    for (const project of projects) {
+      expect(project).not.toHaveProperty("repoUrl");
     }
   });
 

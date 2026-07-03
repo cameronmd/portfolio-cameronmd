@@ -11,8 +11,16 @@ export default function ProjectCard({ project }: { project: Project }) {
         <p className="mt-1 text-sm font-medium text-brand-600 dark:text-brand-400">
           {project.tagline}
         </p>
+
         <p className="mt-4 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
           {project.description}
+        </p>
+
+        <p className="mt-3 rounded-lg bg-slate-50 px-3 py-2 text-sm text-slate-600 dark:bg-slate-800/60 dark:text-slate-300">
+          <span className="font-semibold text-slate-900 dark:text-white">
+            Who it&apos;s for:{" "}
+          </span>
+          {project.useCase}
         </p>
 
         <ul className="mt-4 space-y-2">
@@ -29,6 +37,36 @@ export default function ProjectCard({ project }: { project: Project }) {
           ))}
         </ul>
 
+        {project.chatExample && (
+          <div
+            className="mt-5 rounded-xl border border-slate-200 bg-slate-50 p-3 dark:border-slate-800 dark:bg-slate-950/50"
+            aria-label="Example WhatsApp exchange"
+          >
+            <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-slate-400">
+              In the group chat
+            </p>
+            <ul className="space-y-1.5">
+              {project.chatExample.map((message, i) => (
+                <li
+                  key={`${message.author}-${i}`}
+                  className={`rounded-lg px-2.5 py-1.5 text-xs leading-snug ${
+                    message.system
+                      ? "bg-emerald-500/10 text-slate-700 dark:text-slate-200"
+                      : "bg-white text-slate-700 shadow-sm dark:bg-slate-800 dark:text-slate-100"
+                  }`}
+                >
+                  <span className="font-semibold text-slate-900 dark:text-white">
+                    {message.author}:{" "}
+                  </span>
+                  <span className={message.system ? "" : "font-mono"}>
+                    {message.text}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+
         <ul className="mt-5 flex flex-wrap gap-2" aria-label="Tech stack">
           {project.stack.map((tech) => (
             <li
@@ -40,24 +78,20 @@ export default function ProjectCard({ project }: { project: Project }) {
           ))}
         </ul>
 
-        <div className="mt-6 flex flex-wrap gap-4 pt-2">
-          <a
-            href={project.repoUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-sm font-semibold text-brand-600 hover:underline dark:text-brand-400"
-          >
-            Source →
-          </a>
-          {project.liveUrl && (
+        <div className="mt-6 flex flex-wrap items-center gap-4 pt-2">
+          {project.liveUrl ? (
             <a
               href={project.liveUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-sm font-semibold text-slate-700 hover:underline dark:text-slate-300"
+              className="text-sm font-semibold text-brand-600 hover:underline dark:text-brand-400"
             >
-              Live site →
+              Visit {project.liveLabel ?? "live site"} →
             </a>
+          ) : (
+            <span className="text-sm font-medium text-slate-500 dark:text-slate-400">
+              Runs inside WhatsApp — no app to install
+            </span>
           )}
         </div>
       </div>
