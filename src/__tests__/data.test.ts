@@ -47,6 +47,9 @@ describe("projects data", () => {
 describe("cv data", () => {
   it("exposes core profile fields", () => {
     expect(profile.name).toBe("Cameron Matheson-Dear");
+    expect(profile.intro).toBeTruthy();
+    expect(profile.summary).toBeTruthy();
+    expect(profile.intro).not.toBe(profile.summary);
     expect(profile.email).toContain("@");
     expect(profile.links.github).toMatch(/github\.com/);
     expect(profile.links.linkedin).toMatch(/linkedin\.com/);
