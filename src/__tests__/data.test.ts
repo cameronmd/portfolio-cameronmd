@@ -36,6 +36,7 @@ describe("cv data", () => {
     expect(profile.email).toContain("@");
     expect(profile.links.github).toMatch(/github\.com/);
     expect(profile.links.linkedin).toMatch(/linkedin\.com/);
+    expect(profile.url).toMatch(/^https:\/\//);
   });
 
   it("has at least one experience, education and skill entry", () => {
