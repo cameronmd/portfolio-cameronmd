@@ -56,9 +56,10 @@ src/
 ├── app/
 │   ├── layout.tsx      # Root layout, fonts, <head> metadata
 │   ├── page.tsx        # Home page — composes every section
+│   ├── icon.svg        # CMD monogram favicon (Next.js icon convention)
 │   └── globals.css     # Tailwind directives + base styles
 ├── components/         # One component per page section
-│   ├── Nav.tsx
+│   ├── Nav.tsx         # Sticky nav; scroll-spy highlights the section in view
 │   ├── Hero.tsx
 │   ├── About.tsx
 │   ├── Projects.tsx    # Renders a ProjectCard per project
@@ -80,8 +81,11 @@ what the site says:
 - **`src/data/cv.ts`** — your name, headline, bio, work history, education and
   skills. Fields tagged `PLACEHOLDER` are generic defaults; replace them with
   your real details.
-- **`src/data/projects.ts`** — the three projects. Add a `liveUrl` to any
-  project to surface a "Live site" link on its card.
+- **`src/data/projects.ts`** — the three projects. Each has a `useCase` and
+  technical `highlights`. Source repos are private, so a project surfaces a
+  live-site link via `liveUrl` (with an optional pretty `liveLabel`), or — for
+  products with no public web UI, like the WhatsApp bot — a worked
+  `chatExample` rendered as a mini chat mockup instead.
 
 ---
 
@@ -93,8 +97,9 @@ Testing Library. The suite covers:
 - **Data integrity** — every project has the fields the UI relies on; slugs are
   unique; the CV exposes its core fields.
 - **Rendering** — each section renders its headings, links and content.
-- **Behaviour** — `ProjectCard` only shows a "Live site" link when a `liveUrl`
-  is set; nav links point at the right anchors; contact links use the correct
+- **Behaviour** — `ProjectCard` links to the live site when a `liveUrl` is set
+  and renders the worked chat example otherwise; the nav scroll-spy marks the
+  section in view as `aria-current`; contact links use the correct
   `mailto:`/profile URLs.
 
 ```bash
