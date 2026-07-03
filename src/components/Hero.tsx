@@ -21,7 +21,7 @@ export default function Hero() {
           {profile.specialism}
         </p>
         <p className="mt-6 max-w-2xl text-lg leading-relaxed text-slate-600 dark:text-slate-300">
-          {profile.summary}
+          {profile.intro}
         </p>
         <div className="mt-8 flex flex-wrap gap-3">
           <a

@@ -26,15 +26,22 @@ export const profile = {
   name: "Cameron Matheson-Dear",
   headline: "Senior Software Engineer & Team Lead",
   specialism: "Financial & payments software · ATM specialist",
+  // Short hook for the hero — the fuller career story lives in `summary`.
+  intro:
+    "Seven years building software for the financial and payments industry — " +
+    "these days leading a team at NCR Atleos on the ATMs and self-service " +
+    "banking that millions of people rely on without a second thought. Away " +
+    "from the day job I design, build and ship full-stack products end to end; " +
+    "a few are below.",
   summary:
-    "Senior Software Engineer and team lead with seven years building software " +
-    "for the financial and payments industry, specialising in ATMs and " +
-    "self-service banking. I lead a team at NCR Atleos across integration and " +
-    "automation, after five years at FIS Global taking a web-based ATM " +
-    "simulation and testing platform from beta to a worldwide customer base. " +
-    "Away from the day job I design, build and ship full-stack side projects " +
-    "end to end — several are live and in weekly use below. BSc (Hons) " +
-    "Computing (2:1), University of Abertay Dundee.",
+    "Senior Software Engineer and team lead with seven years in the financial " +
+    "and payments industry, specialising in ATMs and self-service banking " +
+    "(CEN-XFS, EMV). I currently lead a team at NCR Atleos across integration " +
+    "and automation, after five years at FIS Global taking a web-based ATM " +
+    "simulation and testing platform from beta to a worldwide customer base — " +
+    "first as a developer, then as the subject-matter expert rolling it out to " +
+    "customers across every region. BSc (Hons) Computing (2:1), University of " +
+    "Abertay Dundee.",
   location: "Falkirk, Scotland",
   email: "cameron.matheson.dear@gmail.com",
   url: "https://portfolio-cameronmd.vercel.app",

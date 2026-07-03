@@ -19,14 +19,20 @@ describe("Nav", () => {
 });
 
 describe("Hero", () => {
-  it("shows the name, headline and summary", () => {
+  it("shows the name, headline and intro", () => {
     render(<Hero />);
     expect(
       screen.getByRole("heading", { level: 1, name: profile.name })
     ).toBeInTheDocument();
     expect(screen.getByText(profile.headline)).toBeInTheDocument();
     expect(screen.getByText(profile.specialism)).toBeInTheDocument();
-    expect(screen.getByText(profile.summary)).toBeInTheDocument();
+    expect(screen.getByText(profile.intro)).toBeInTheDocument();
+  });
+
+  it("leads with the short intro, not the full about-section summary", () => {
+    render(<Hero />);
+    expect(profile.intro).not.toBe(profile.summary);
+    expect(screen.queryByText(profile.summary)).not.toBeInTheDocument();
   });
 });
 
