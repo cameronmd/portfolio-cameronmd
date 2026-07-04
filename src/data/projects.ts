@@ -42,32 +42,33 @@ export const projects: Project[] = [
   {
     slug: "thegrouporganiser",
     name: "TheGroupOrganiser",
-    tagline: "A WhatsApp bot that runs your five-a-side",
+    tagline: "A WhatsApp bot that organises any group event",
     useCase:
-      "For whoever herds 14 players into a 10-a-side every week — sign-ups, guests, payments and reserves handled inside the group chat, no app to install.",
+      "For the person who always ends up doing the admin — chasing who's in, who's out and who still owes money. It handles the jobs nobody enjoys, right inside the chat. (I built it for my weekly game of football.)",
     description:
-      "A WhatsApp bot that lives in your group chat as a linked device. Members reply with simple commands and it keeps a live squad list, promotes reserves and chases payments automatically — replacing the weekly spreadsheet and the endless 'who's in?' thread.",
+      "A WhatsApp bot that lives in your group chat as a linked device and takes over the event admin nobody likes doing. It tracks who's in, who's out and who's paid, handles guests and reserve lists, and runs one-off or weekly recurring events — so the same person doesn't have to herd everyone every single time.",
     highlights: [
+      "Tracks who's in, who's out and who's paid from simple chat commands (!in, !out, !paid, !+1)",
+      "Handles one-off events and weekly recurring ones, with reminders and event-day nudges",
+      "Automatic reserve lists — promotes the next person the moment a space opens",
       "Runs as a linked device via whatsapp-web.js on headless Chromium — no WhatsApp Business API fees",
-      "Chat commands (!in, !out, !paid, !+1) drive a live squad list with automatic reserve promotion",
-      "Cron-scheduled reminders for recurring fixtures and event-day nudges",
       "SQLite persistence with zero-downtime schema migrations; Dockerised on Railway with a QR-code linking flow",
     ],
     stack: ["Node.js", "whatsapp-web.js", "SQLite", "node-cron", "Docker", "Railway"],
     chatExample: [
       { author: "Cameron", text: "!in" },
-      { author: "Organiser", system: true, text: "✅ Cameron's in for Thursday. Squad 9/10." },
+      { author: "Organiser", system: true, text: "✅ Cameron's in for Thursday. 9/10 spots filled." },
       { author: "Jordan", text: "!+1" },
       {
         author: "Organiser",
         system: true,
-        text: "✅ Guest added for Jordan — squad full at 10/10. New names now go to reserves.",
+        text: "✅ Guest added for Jordan — full at 10/10. New names now go to reserves.",
       },
-      { author: "Sam", text: "!in" },
+      { author: "Sam", text: "!paid" },
       {
         author: "Organiser",
         system: true,
-        text: "🪑 Sam → reserves (#1). First to play if a space opens.",
+        text: "💷 Marked Sam as paid. 6 of 10 have settled up.",
       },
     ],
     accent: "from-brand-500 to-indigo-600",
@@ -77,16 +78,17 @@ export const projects: Project[] = [
     name: "TheGroupGameweek",
     tagline: "Fantasy football mini-league stats, done properly",
     useCase:
-      "For an FPL mini-league that wants more than the official table — deep stats, trends and weekly banter in one place.",
+      "For any FPL mini-league that wants more than the official table — anyone can add their own league for deep stats, trends and weekly banter in one place.",
     description:
-      "A mobile-first dashboard for Fantasy Premier League mini-leagues. It syncs every gameweek from the official FPL API, computes the stats the official site won't show you, and serves them up with league-wide awards and a healthy dose of banter.",
+      "A mobile-first dashboard for Fantasy Premier League mini-leagues. Anyone can add their own league via a secure one-off payment; it then syncs every gameweek from the official FPL API, computes the stats the official site won't show you, and serves them up with league-wide awards and a healthy dose of banter.",
     highlights: [
+      "Self-serve: add any FPL mini-league for analysis via a secure Stripe checkout",
       "Pure-function stat engine (captaincy returns, bench points, transfer hits, form) with dedicated unit tests",
       "Auto-generated gameweek awards and banter derived straight from the underlying data",
       "Mobile-first React UI — built for ≤375px first, desktop as progressive enhancement",
       "Scheduled Railway cron syncs, Supabase Postgres, and a combined backend + frontend test suite",
     ],
-    stack: ["React", "Vite", "Tailwind", "Node.js", "Express", "Supabase", "Vercel"],
+    stack: ["React", "Vite", "Tailwind", "Node.js", "Express", "Supabase", "Stripe", "Vercel"],
     liveUrl: "https://thegroupgameweek.com",
     liveLabel: "thegroupgameweek.com",
     accent: "from-amber-500 to-orange-600",
