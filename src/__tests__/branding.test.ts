@@ -8,3 +8,10 @@ describe("favicon", () => {
     expect(svg).toContain(">CMD<");
   });
 });
+
+describe("global styles", () => {
+  it("offsets anchored sections below the sticky header", () => {
+    const css = readFileSync(join(process.cwd(), "src/app/globals.css"), "utf8");
+    expect(css).toMatch(/scroll-padding-top:\s*4rem/);
+  });
+});

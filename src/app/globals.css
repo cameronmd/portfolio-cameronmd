@@ -8,6 +8,8 @@
 
 html {
   scroll-behavior: smooth;
+  /* Keep anchored sections clear of the sticky header (h-14 = 3.5rem). */
+  scroll-padding-top: 4rem;
 }
 
 @layer base {

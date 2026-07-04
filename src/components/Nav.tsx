@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import ThemeToggle from "./ThemeToggle";
 
 const links = [
   { href: "#about", id: "about", label: "About" },
@@ -44,32 +45,35 @@ export default function Nav() {
         <a href="#top" className="font-semibold tracking-tight">
           CMD
         </a>
-        <ul className="flex items-center gap-1 sm:gap-4">
-          {links.map((link) => {
-            const isActive = active === link.id;
-            return (
-              <li key={link.href}>
-                <a
-                  href={link.href}
-                  aria-current={isActive ? "true" : undefined}
-                  className={`relative rounded px-2 py-2 text-sm transition-colors ${
-                    isActive
-                      ? "text-brand-600 dark:text-brand-400"
-                      : "text-slate-600 hover:text-brand-600 dark:text-slate-300 dark:hover:text-brand-400"
-                  }`}
-                >
-                  {link.label}
-                  <span
-                    aria-hidden
-                    className={`absolute inset-x-2 -bottom-px h-0.5 origin-left rounded-full bg-brand-500 transition-transform duration-200 ${
-                      isActive ? "scale-x-100" : "scale-x-0"
+        <div className="flex items-center gap-1 sm:gap-3">
+          <ul className="flex items-center gap-1 sm:gap-4">
+            {links.map((link) => {
+              const isActive = active === link.id;
+              return (
+                <li key={link.href}>
+                  <a
+                    href={link.href}
+                    aria-current={isActive ? "true" : undefined}
+                    className={`relative rounded px-2 py-2 text-sm transition-colors ${
+                      isActive
+                        ? "text-brand-600 dark:text-brand-400"
+                        : "text-slate-600 hover:text-brand-600 dark:text-slate-300 dark:hover:text-brand-400"
                     }`}
-                  />
-                </a>
-              </li>
-            );
-          })}
-        </ul>
+                  >
+                    {link.label}
+                    <span
+                      aria-hidden
+                      className={`absolute inset-x-2 -bottom-px h-0.5 origin-left rounded-full bg-brand-500 transition-transform duration-200 ${
+                        isActive ? "scale-x-100" : "scale-x-0"
+                      }`}
+                    />
+                  </a>
+                </li>
+              );
+            })}
+          </ul>
+          <ThemeToggle />
+        </div>
       </nav>
     </header>
   );
