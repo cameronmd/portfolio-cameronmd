@@ -42,6 +42,13 @@ describe("projects data", () => {
     const slugs = projects.map((p) => p.slug);
     expect(new Set(slugs).size).toBe(slugs.length);
   });
+
+  it("advertises TheGroupGameweek's self-serve paid league analysis", () => {
+    const gameweek = projects.find((p) => p.slug === "thegroupgameweek")!;
+    const copy = [gameweek.description, ...gameweek.highlights].join(" ");
+    expect(copy).toMatch(/payment|checkout|stripe/i);
+    expect(gameweek.stack).toContain("Stripe");
+  });
 });
 
 describe("cv data", () => {
@@ -63,5 +70,12 @@ describe("cv data", () => {
     for (const group of skills) {
       expect(group.items.length).toBeGreaterThan(0);
     }
+  });
+
+  it("lists AI-assisted development with Claude and Copilot", () => {
+    const aiSkills = skills.flatMap((group) => group.items);
+    expect(aiSkills).toEqual(
+      expect.arrayContaining(["Claude", "GitHub Copilot"])
+    );
   });
 });

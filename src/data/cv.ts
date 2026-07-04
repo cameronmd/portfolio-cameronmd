@@ -47,7 +47,7 @@ export const profile = {
   url: "https://portfolio-cameronmd.vercel.app",
   interests:
     "Away from the keyboard: tinkering with a Raspberry Pi smart-home setup, " +
-    "football, tennis and snooker, Munro bagging (and Kilimanjaro in 2020), and " +
+    "football, tennis and snooker, Munro bagging (and Kilimanjaro), and " +
     "travelling to explore new countries and cultures.",
   links: {
     github: "https://github.com/cameronmd",
@@ -133,6 +133,10 @@ export const skills: SkillGroup[] = [
   {
     category: "Platforms & data",
     items: ["Azure", "Microsoft SQL Server", "Supabase / Postgres", "Vercel", "Railway"],
+  },
+  {
+    category: "AI-assisted development",
+    items: ["Claude", "GitHub Copilot", "Claude Code"],
   },
   {
     category: "Ways of working",
