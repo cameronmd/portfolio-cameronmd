@@ -18,6 +18,11 @@ export const metadata: Metadata = {
     url: profile.url,
     type: "website",
   },
+  twitter: {
+    card: "summary_large_image",
+    title: `${profile.name} — ${profile.headline}`,
+    description: profile.summary,
+  },
 };
 
 // Runs before paint so the saved (or system) theme is applied with no flash.
