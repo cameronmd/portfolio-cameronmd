@@ -2,15 +2,28 @@ import { projects } from "@/data/projects";
 import { profile, experience, education, skills } from "@/data/cv";
 
 describe("projects data", () => {
-  it("includes all three showcase projects", () => {
+  it("includes every showcase project", () => {
     const slugs = projects.map((p) => p.slug);
     expect(slugs).toEqual(
       expect.arrayContaining([
         "thegroupbet",
         "thegrouporganiser",
         "thegroupgameweek",
+        "falkirkcurlingclub",
+        "falkirkfurybasketball",
       ])
     );
+  });
+
+  it("showcases the two Falkirk club fixture apps as offline-first PWAs", () => {
+    for (const slug of ["falkirkcurlingclub", "falkirkfurybasketball"]) {
+      const project = projects.find((p) => p.slug === slug)!;
+      const copy = [project.description, ...project.highlights].join(" ");
+      expect(copy).toMatch(/offline|PWA/i);
+      expect(copy).toMatch(/calendar|\.ics/i);
+      expect(project.stack).toContain("PWA");
+      expect(project.liveUrl).toMatch(/github\.io/);
+    }
   });
 
   it("gives every project the fields the UI relies on", () => {

@@ -6,8 +6,9 @@ These override default behaviour — read them before making changes.
 ## Project overview
 
 A personal portfolio and CV website for **Cameron Matheson-Dear**. It showcases
-three side projects — **TheGroupBet**, **TheGroupOrganiser** and
-**TheGroupGameweek** — alongside an "about me / CV" section. Built with a modern
+five side projects — **TheGroupBet**, **TheGroupOrganiser**,
+**TheGroupGameweek** and the **Falkirk Curling** and **Falkirk Fury Basketball**
+club fixture apps — alongside an "about me / CV" section. Built with a modern
 stack, fully unit-tested, and continuously deployed: every commit to `main`
 updates the live site automatically via Vercel.
 
@@ -47,7 +48,7 @@ All copy lives in `src/data/` — never edit components to change wording:
 
 - `src/data/cv.ts` — `profile` (name, headline, specialism, summary, location,
   interests, links), `experience`, `education`, `skills`.
-- `src/data/projects.ts` — the three showcase projects. Add a `liveUrl` to a
+- `src/data/projects.ts` — the showcase projects. Add a `liveUrl` to a
   project to surface a "Live site" link.
 
 ## Tech stack

@@ -1,7 +1,8 @@
 # Portfolio — Cameron Matheson-Dear
 
-A personal portfolio and CV site that showcases three projects — **TheGroupBet**,
-**TheGroupOrganiser** and **TheGroupGameweek** — alongside a short "about me"
+A personal portfolio and CV site that showcases five projects — **TheGroupBet**,
+**TheGroupOrganiser**, **TheGroupGameweek** and the **Falkirk Curling** and
+**Falkirk Fury Basketball** club fixture apps — alongside a short "about me"
 section. Built with a modern stack, fully unit-tested, and continuously
 deployed: every commit to `main` updates the live site automatically.
 
@@ -70,7 +71,7 @@ src/
 │   └── Footer.tsx
 └── data/               # Single source of truth for all content
     ├── cv.ts           # Bio, experience, education, skills
-    └── projects.ts     # The three showcase projects
+    └── projects.ts     # The showcase projects
 ```
 
 ### Editing content
@@ -150,6 +151,8 @@ the quality gate, and Vercel handles the build-and-ship.
 | [**TheGroupBet**](https://github.com/cameronmd/thegroupbet) | Track weekly football accumulators with your mates — live feed, auto-settlement, season reports, push notifications | React · Express · Supabase |
 | [**TheGroupOrganiser**](https://github.com/cameronmd/thegrouporganiser) | A WhatsApp bot that runs a five-a-side — sign-ups, guests, payments and reserves from the group chat | Node.js · whatsapp-web.js · SQLite |
 | [**TheGroupGameweek**](https://github.com/cameronmd/thegroupgameweek) | Fantasy football mini-league stats dashboard, mobile-first | React · Express · Supabase |
+| [**Falkirk Curling Club**](https://cameronmd.github.io/FalkirkCurlingClub/) | Turns the club's season rota spreadsheet into just your games, with one-tap calendar export — offline-first PWA | Vanilla JS · SheetJS · PWA |
+| [**Falkirk Fury Basketball**](https://cameronmd.github.io/FalkirkFuryBasketballClub/) | Every team's season fixtures, pre-loaded, with venues and calendar export — offline-first PWA | Vanilla JS · SheetJS · PWA |
 
 ---
 
