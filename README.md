@@ -9,6 +9,7 @@ deployed: every commit to `main` updates the live site automatically.
 **Live site: [cameronmd.github.io/portfolio-cameronmd](https://cameronmd.github.io/portfolio-cameronmd/)**
 
 [![CI](https://github.com/cameronmd/portfolio-cameronmd/actions/workflows/ci.yml/badge.svg)](https://github.com/cameronmd/portfolio-cameronmd/actions/workflows/ci.yml)
+[![Deploy to GitHub Pages](https://github.com/cameronmd/portfolio-cameronmd/actions/workflows/deploy.yml/badge.svg)](https://github.com/cameronmd/portfolio-cameronmd/actions/workflows/deploy.yml)
 
 ---
 
@@ -85,7 +86,7 @@ what the site says:
 - **`src/data/cv.ts`** — your name, headline, bio, work history, education and
   skills. Fields tagged `PLACEHOLDER` are generic defaults; replace them with
   your real details.
-- **`src/data/projects.ts`** — the three projects. Each has a `useCase` and
+- **`src/data/projects.ts`** — the five showcase projects. Each has a `useCase` and
   technical `highlights`. Source repos are private, so a project surfaces a
   live-site link via `liveUrl` (with an optional pretty `liveLabel`), or — for
   products with no public web UI, like the WhatsApp bot — a worked
