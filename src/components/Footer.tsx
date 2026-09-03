@@ -8,7 +8,7 @@ export default function Footer() {
         <p>
           © {year} {profile.name}
         </p>
-        <p>Built with Next.js &amp; Tailwind · deployed on Vercel</p>
+        <p>Built with Next.js &amp; Tailwind · deployed on GitHub Pages</p>
       </div>
     </footer>
   );

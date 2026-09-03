@@ -74,6 +74,8 @@ describe("cv data", () => {
     expect(profile.links.github).toMatch(/github\.com/);
     expect(profile.links.linkedin).toMatch(/linkedin\.com/);
     expect(profile.url).toMatch(/^https:\/\//);
+    // Canonical/OG URLs point at the GitHub Pages project site.
+    expect(profile.url).toBe("https://cameronmd.github.io/portfolio-cameronmd");
   });
 
   it("has at least one experience, education and skill entry", () => {

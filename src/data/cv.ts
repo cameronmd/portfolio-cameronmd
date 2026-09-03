@@ -44,7 +44,7 @@ export const profile = {
     "Abertay Dundee.",
   location: "Falkirk, Scotland",
   email: "cameron.matheson.dear@gmail.com",
-  url: "https://portfolio-cameronmd.vercel.app",
+  url: "https://cameronmd.github.io/portfolio-cameronmd",
   interests:
     "Away from the keyboard: tinkering with a Raspberry Pi smart-home setup, " +
     "football, tennis and snooker, Munro bagging (and Kilimanjaro), and " +

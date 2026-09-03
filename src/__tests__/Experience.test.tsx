@@ -46,4 +46,9 @@ describe("Footer", () => {
       screen.getByText(new RegExp(`${year}.*${profile.name}`))
     ).toBeInTheDocument();
   });
+
+  it("names GitHub Pages as the deploy target", () => {
+    render(<Footer />);
+    expect(screen.getByText(/deployed on GitHub Pages/i)).toBeInTheDocument();
+  });
 });

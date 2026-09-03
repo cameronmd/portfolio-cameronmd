@@ -6,7 +6,7 @@ A personal portfolio and CV site that showcases five projects — **TheGroupBet*
 section. Built with a modern stack, fully unit-tested, and continuously
 deployed: every commit to `main` updates the live site automatically.
 
-**Live site: [portfolio-cameronmd.vercel.app](https://portfolio-cameronmd.vercel.app)**
+**Live site: [cameronmd.github.io/portfolio-cameronmd](https://cameronmd.github.io/portfolio-cameronmd/)**
 
 [![CI](https://github.com/cameronmd/portfolio-cameronmd/actions/workflows/ci.yml/badge.svg)](https://github.com/cameronmd/portfolio-cameronmd/actions/workflows/ci.yml)
 
@@ -22,10 +22,13 @@ deployed: every commit to `main` updates the live site automatically.
 | Testing        | Jest + React Testing Library (`next/jest`) |
 | Linting        | ESLint (`next/core-web-vitals`)          |
 | CI             | GitHub Actions                           |
-| Hosting        | [Vercel](https://vercel.com)             |
+| Hosting        | [GitHub Pages](https://pages.github.com) |
 
-The site is fully static (`○ (Static) prerendered as static content`), so it is
-fast, cheap to host and trivially cacheable on Vercel's edge network.
+The site is fully static — `next build` runs a static export
+(`output: "export"`) to `out/`, so it is fast, cheap to host and served
+straight from GitHub Pages' CDN. Because it lives at a project subpath
+(`/portfolio-cameronmd`), `next.config.mjs` sets a matching `basePath` for
+production builds.
 
 ---
 
@@ -120,27 +123,35 @@ pull request to `main`:
 1. `npm ci` — clean install
 2. `npm run lint` — ESLint
 3. `npm run test:ci` — tests with coverage
-4. `npm run build` — production build
+4. `npm run build` — production build (static export)
 
 The build must be green before a deploy is considered healthy.
 
-### Deployment (Vercel)
+### Deployment (GitHub Pages)
 
-Deployment uses Vercel's native Git integration, so **every commit to `main`
-ships to production automatically** and every pull request gets its own preview
-URL. One-time setup:
+Deployment is handled by
+[`.github/workflows/deploy.yml`](.github/workflows/deploy.yml): on every push to
+`main` it builds the static export and publishes `out/` to GitHub Pages using
+the official `upload-pages-artifact` / `deploy-pages` actions. CI above stays
+the quality gate; this workflow does the build-and-ship.
 
-1. Sign in at [vercel.com](https://vercel.com) with your GitHub account.
-2. **Add New… → Project** and import `cameronmd/portfolio-cameronmd`.
-3. Vercel auto-detects Next.js — accept the defaults and **Deploy**.
+One-time setup:
 
-That's it. From then on:
+1. In the repo, go to **Settings → Pages**.
+2. Under **Build and deployment → Source**, choose **GitHub Actions**.
+3. Push to `main` (or run the **Deploy to GitHub Pages** workflow manually from
+   the **Actions** tab). The site goes live at
+   `https://cameronmd.github.io/portfolio-cameronmd/`.
 
-- Push to `main` → production deploy.
-- Open a PR → preview deploy, with the URL posted on the PR.
+Notes:
 
-No secrets or workflow changes are needed; the GitHub Actions workflow above is
-the quality gate, and Vercel handles the build-and-ship.
+- The site is a **project page**, so it is served from the `/portfolio-cameronmd`
+  subpath; `next.config.mjs` sets a matching `basePath` for production builds.
+  Moving to a user page or a custom domain at the root means clearing `basePath`
+  and updating `profile.url` in `src/data/cv.ts`.
+- `public/.nojekyll` keeps GitHub Pages from stripping Next's `_next/` assets.
+- Unlike a Vercel setup, GitHub Pages gives **no per-PR preview URLs** — pull
+  requests are validated by CI only.
 
 ---
 

@@ -5,12 +5,16 @@ import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
+// metadataBase is the bare origin, not the full site URL: Next prepends the
+// configured `basePath` to file-based metadata (e.g. the opengraph image), so
+// a metadataBase that also carried the /portfolio-cameronmd subpath would
+// double it. Canonical and og:url are given as absolute URLs instead.
 export const metadata: Metadata = {
-  metadataBase: new URL(profile.url),
+  metadataBase: new URL(new URL(profile.url).origin),
   title: `${profile.name} — ${profile.headline}`,
   description: profile.summary,
   alternates: {
-    canonical: "/",
+    canonical: profile.url,
   },
   openGraph: {
     title: `${profile.name} — ${profile.headline}`,

@@ -4,6 +4,8 @@ import { profile } from "@/data/cv";
 export const alt = `${profile.name} — ${profile.headline}`;
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
+// Render the card to a static PNG at build time (required by `output: export`).
+export const dynamic = "force-static";
 
 // Branded share card: name + role on the brand gradient (no photo), matching
 // the CMD favicon. Rendered to a PNG at build time by next/og.

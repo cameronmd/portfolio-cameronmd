@@ -10,10 +10,12 @@ five side projects — **TheGroupBet**, **TheGroupOrganiser**,
 **TheGroupGameweek** and the **Falkirk Curling** and **Falkirk Fury Basketball**
 club fixture apps — alongside an "about me / CV" section. Built with a modern
 stack, fully unit-tested, and continuously deployed: every commit to `main`
-updates the live site automatically via Vercel.
+updates the live site automatically via GitHub Pages.
 
 - **Repo:** `cameronmd/portfolio-cameronmd`
-- **Hosting:** Vercel (auto-deploys from `main`; PRs get preview URLs)
+- **Hosting:** GitHub Pages (auto-deploys from `main` via GitHub Actions).
+  Served from the project subpath
+  `https://cameronmd.github.io/portfolio-cameronmd/`.
 
 ## About Cameron (for content/positioning)
 
@@ -54,8 +56,9 @@ All copy lives in `src/data/` — never edit components to change wording:
 ## Tech stack
 
 Next.js 15 (App Router) · TypeScript · Tailwind CSS · Jest + React Testing
-Library (`next/jest`) · ESLint · GitHub Actions CI · Vercel hosting. The site is
-fully static (prerendered).
+Library (`next/jest`) · ESLint · GitHub Actions CI · GitHub Pages hosting. The
+site is fully static — `next build` runs a static export (`output: "export"`)
+to `out/`, with a `basePath` of `/portfolio-cameronmd` for the project subpath.
 
 ## Coding rules
 
@@ -98,6 +101,17 @@ Update `README.md` when scripts, structure, or deployment change.
 
 ## Deployment
 
-Vercel's native Git integration ships every commit to `main` to production and
-gives each PR a preview URL. One-time setup is in `README.md`. The GitHub Actions
-workflow is the quality gate; Vercel does the build-and-ship.
+GitHub Pages hosts the site. `.github/workflows/deploy.yml` builds the static
+export and publishes it to Pages on every push to `main`; `.github/workflows/ci.yml`
+stays the quality gate (lint → test → build). One-time setup (enabling Pages
+with the "GitHub Actions" source) is in `README.md`.
+
+Notes for anyone changing hosting details:
+
+- The `basePath` in `next.config.mjs` must match the repo name while the site
+  is a project page (`/portfolio-cameronmd`). If it moves to a user page or a
+  custom domain at the root, clear `basePath` and update `profile.url` in
+  `src/data/cv.ts`.
+- `public/.nojekyll` stops GitHub Pages from dropping Next's `_next/` assets.
+- Unlike the previous Vercel setup, GitHub Pages does **not** produce per-PR
+  preview URLs — PRs are validated by CI only.
