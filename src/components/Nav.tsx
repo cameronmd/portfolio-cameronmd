@@ -13,6 +13,7 @@ const links = [
 
 export default function Nav() {
   const [active, setActive] = useState<string>("");
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     if (typeof IntersectionObserver === "undefined") return;
@@ -46,7 +47,8 @@ export default function Nav() {
           CMD
         </a>
         <div className="flex items-center gap-1 sm:gap-3">
-          <ul className="flex items-center gap-1 sm:gap-4">
+          {/* Desktop links — collapse into a menu on small screens. */}
+          <ul className="hidden items-center gap-4 sm:flex">
             {links.map((link) => {
               const isActive = active === link.id;
               return (
@@ -72,9 +74,67 @@ export default function Nav() {
               );
             })}
           </ul>
+
           <ThemeToggle />
+
+          {/* Mobile menu toggle. */}
+          <button
+            type="button"
+            onClick={() => setMenuOpen((open) => !open)}
+            aria-expanded={menuOpen}
+            aria-controls="mobile-nav"
+            aria-label={menuOpen ? "Close menu" : "Open menu"}
+            className="rounded-md p-2 text-slate-600 transition-colors hover:text-brand-600 sm:hidden dark:text-slate-300 dark:hover:text-brand-400"
+          >
+            <svg
+              aria-hidden
+              viewBox="0 0 24 24"
+              className="h-5 w-5"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              {menuOpen ? (
+                <path d="M6 6l12 12M18 6L6 18" />
+              ) : (
+                <path d="M4 6h16M4 12h16M4 18h16" />
+              )}
+            </svg>
+          </button>
         </div>
       </nav>
+
+      {/* Mobile dropdown panel. */}
+      {menuOpen && (
+        <div
+          id="mobile-nav"
+          className="border-t border-slate-200/70 sm:hidden dark:border-slate-800"
+        >
+          <ul className="container-page flex flex-col py-2">
+            {links.map((link) => {
+              const isActive = active === link.id;
+              return (
+                <li key={link.href}>
+                  <a
+                    href={link.href}
+                    onClick={() => setMenuOpen(false)}
+                    aria-current={isActive ? "true" : undefined}
+                    className={`block rounded px-2 py-3 text-sm transition-colors ${
+                      isActive
+                        ? "text-brand-600 dark:text-brand-400"
+                        : "text-slate-600 hover:text-brand-600 dark:text-slate-300 dark:hover:text-brand-400"
+                    }`}
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      )}
     </header>
   );
 }

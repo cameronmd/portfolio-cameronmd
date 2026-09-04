@@ -1,5 +1,6 @@
-import { render, screen, act } from "@testing-library/react";
+import { render, screen, act, fireEvent, within } from "@testing-library/react";
 import Home from "@/app/page";
+import Nav from "@/components/Nav";
 
 type PartialEntry = Pick<
   IntersectionObserverEntry,
@@ -60,5 +61,42 @@ describe("Nav scroll-spy", () => {
       "aria-current",
       "true"
     );
+  });
+});
+
+describe("Nav mobile menu", () => {
+  it("is collapsed by default with no dropdown panel", () => {
+    render(<Nav />);
+    const toggle = screen.getByRole("button", { name: "Open menu" });
+    expect(toggle).toHaveAttribute("aria-expanded", "false");
+    expect(document.getElementById("mobile-nav")).toBeNull();
+  });
+
+  it("opens the dropdown with the section links when the toggle is pressed", () => {
+    render(<Nav />);
+    fireEvent.click(screen.getByRole("button", { name: "Open menu" }));
+
+    expect(
+      screen.getByRole("button", { name: "Close menu" })
+    ).toHaveAttribute("aria-expanded", "true");
+
+    const panel = document.getElementById("mobile-nav") as HTMLElement;
+    expect(panel).not.toBeNull();
+    expect(
+      within(panel).getByRole("link", { name: "Contact" })
+    ).toHaveAttribute("href", "#contact");
+  });
+
+  it("closes again after a link in the dropdown is chosen", () => {
+    render(<Nav />);
+    fireEvent.click(screen.getByRole("button", { name: "Open menu" }));
+
+    const panel = document.getElementById("mobile-nav") as HTMLElement;
+    fireEvent.click(within(panel).getByRole("link", { name: "Projects" }));
+
+    expect(document.getElementById("mobile-nav")).toBeNull();
+    expect(
+      screen.getByRole("button", { name: "Open menu" })
+    ).toHaveAttribute("aria-expanded", "false");
   });
 });
