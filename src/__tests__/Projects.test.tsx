@@ -15,6 +15,15 @@ describe("Projects section", () => {
       ).toBeInTheDocument();
     }
   });
+
+  it("introduces the projects without hard-coding how many there are", () => {
+    render(<Projects />);
+    const intro = screen.getByText(/designed, built, shipped/i);
+    // A count before "products" would go stale whenever a project is added or removed.
+    expect(intro.textContent).not.toMatch(
+      /\b(one|two|three|four|five|six|seven|eight|nine|ten|\d+)\s+products?\b/i
+    );
+  });
 });
 
 describe("ProjectCard", () => {
